@@ -21,7 +21,7 @@ data class AuthenticationState(
         var location : String? = null
 ): StateType
 
-data class RegistrationState( registerState: RegisterState) : StateType
+data class RegistrationState(var registerState: RegisterState) : StateType
 
 enum class LoggedInState{
     Request,
