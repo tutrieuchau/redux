@@ -7,7 +7,7 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
     res.send('Hello World');
 });
-app.post('/register', function(req, res){
+app.post('/registration', function(req, res){
     var rgUser = req.body;
     setTimeout(function(){ 
 
@@ -18,7 +18,7 @@ app.post('/register', function(req, res){
             res.json({'success':false, 'msg':'register email is exists!'});
         }else{
             users.push(rgUser);
-            res.json({'success':true, 'msg':''});    
+            res.json({"email": rgUser.email, "fullname": rgUser.fullname,'success':true, 'msg':''});    
         }
 
     }, 3000);

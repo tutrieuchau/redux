@@ -22,6 +22,10 @@ allprojects {
         repositories {
             maven {
                 url 'https://rekotlin.s3-ap-southeast-1.amazonaws.com/snapshots'
+
+            }
+            maven{
+                url "https://jitpack.io"
             }
         }
     }

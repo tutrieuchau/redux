@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import com.tutrieuchau.kotlin.Action.LoginAction
 import com.tutrieuchau.kotlin.R
-import com.tutrieuchau.kotlin.State.AppState
-import com.tutrieuchau.kotlin.State.LoggedInState
+import com.tutrieuchau.kotlin.States.AppState
 import com.tutrieuchau.kotlin.mainStore
 import tw.geothings.rekotlin.StoreSubscriber
 
@@ -34,7 +32,7 @@ class Login : Base(), StoreSubscriber<AppState> {
         setContentView(R.layout.activity_login)
 
         btnLogin.setOnClickListener {
-            mainStore.dispatch(LoginAction.Request(username = edtEmail.text.toString(), password = edtPassword.text.toString()))
+//            mainStore.dispatch(LoginAction.Request(username = edtEmail.text.toString(), password = edtPassword.text.toString()))
         }
 
         txtCreate.setOnClickListener {
@@ -48,10 +46,10 @@ class Login : Base(), StoreSubscriber<AppState> {
 
     override fun newState(state: AppState) {
         val authenticationState = state.authenticationState
-        when (authenticationState.loggedInState) {
-            LoggedInState.Request -> {
-                //
-            }
-        }
+//        when (authenticationState.loggedInState) {
+//            LoggedInState.Request -> {
+//                //
+//            }
+//        }
     }
 }

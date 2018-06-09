@@ -4,6 +4,201 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".Controllers.Registration">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progress"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_vertical|center_horizontal">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spitKit"
+            style="@style/SpinKitView.Large.ChasingDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:SpinKit_Color="@android:color/white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="36dp"
+        android:src="@drawable/kotlin"
+        app:layout_constraintBottom_toTopOf="@+id/hor_30"
+        app:layout_constraintEnd_toStartOf="@+id/ver_50"
+        app:layout_constraintStart_toStartOf="@+id/ver_50"
+        app:layout_constraintTop_toTopOf="@+id/ver_25" />
+
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/white"
+        android:contentDescription="Email"
+        android:ems="10"
+        android:inputType="textEmailAddress|textPersonName"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ver_90"
+        app:layout_constraintStart_toStartOf="@+id/ver_10"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:textColorHint="@android:color/white"
+        tools:hint="Email" />
+
+    <EditText
+        android:id="@+id/edtDisplayName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/white"
+        android:contentDescription="DisplayName"
+        android:ems="10"
+        android:inputType="textEmailAddress|textPersonName"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ver_90"
+        app:layout_constraintStart_toStartOf="@+id/ver_10"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail"
+        android:textColorHint="@android:color/white"
+        android:hint="Display Name"/>
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/white"
+        android:contentDescription="Password"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:hint="Password"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/ver_90"
+        app:layout_constraintStart_toStartOf="@+id/ver_10"
+        app:layout_constraintTop_toBottomOf="@+id/edtDisplayName" />
+    <EditText
+        android:id="@+id/edtLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/white"
+        android:contentDescription="Password"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:hint="Location"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/ver_90"
+        app:layout_constraintStart_toStartOf="@+id/ver_10"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+
+    <RadioGroup
+        android:id="@+id/radSex"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/ver_90"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ver_10"
+        app:layout_constraintTop_toBottomOf="@+id/edtLocation">
+
+        <RadioButton
+            android:id="@+id/radMale"
+            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@android:color/white"
+            android:shadowColor="@android:color/white"
+            android:text="Male"
+            android:checked="true"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/radFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@android:color/white"
+            android:shadowColor="@android:color/white"
+            android:text="Female"
+            android:textColor="@android:color/white" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="#CC1D1D"
+        android:text="Regiter"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/ver_90"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ver_10"
+        app:layout_constraintTop_toBottomOf="@+id/radSex" />
+    <android.support.constraint.Guideline
+        android:id="@+id/hor_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/ver_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/ver_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/ver_90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,13 +1,13 @@
 package com.tutrieuchau.kotlin.States
 
-import com.tutrieuchau.kotlin.State.LoggedInState
 import org.rekotlinrouter.HasNavigationState
 import org.rekotlinrouter.NavigationState
 import tw.geothings.rekotlin.StateType
 
 data class AppState(
         override var navigationState: NavigationState,
-        var authenticationState: AuthenticationState
+        var authenticationState: AuthenticationState,
+        var registrationState: RegistrationState
 ) : StateType, HasNavigationState
 
 data class AuthenticationState(
@@ -18,10 +18,14 @@ data class AuthenticationState(
         var displayName : String? = null,
         var avatarUrl : String? = null,
         var sex : String? = null,
-        var location : String? = null
+        var location : String? = null,
+        var isFetching: Boolean = false
 ): StateType
 
-data class RegistrationState(var registerState: RegisterState) : StateType
+data class RegistrationState(var registerState: RegisterState = RegisterState.Request,
+                             var email: String? = null,
+                             var fullName: String? = null,
+                             var message: String? = null) : StateType
 
 enum class LoggedInState{
     Request,

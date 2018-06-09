@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E43F3F"
+    android:background="@color/colorBackground"
     tools:context=".Controllers.Login">
 
     <ImageView
@@ -42,7 +42,7 @@
         app:layout_constraintGuide_percent="0.25636008" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -74,7 +74,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/hor_90"
         app:layout_constraintStart_toStartOf="@+id/hor_10"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
         tools:text="Email" />
 
     <android.support.constraint.Guideline
