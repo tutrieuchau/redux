@@ -1,8 +1,6 @@
 package com.tutrieuchau.kotlin.Controllers
 
-import android.app.FragmentManager
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -10,13 +8,13 @@ import android.widget.RadioGroup
 import com.tutrieuchau.kotlin.Action.RegistAction
 import com.tutrieuchau.kotlin.Dialog.ProgressDialog
 import com.tutrieuchau.kotlin.R
-import com.tutrieuchau.kotlin.States.AppState
 import com.tutrieuchau.kotlin.States.RegisterState
+import com.tutrieuchau.kotlin.States.RegistrationState
 import com.tutrieuchau.kotlin.mainStore
 import tw.geothings.rekotlin.StoreSubscriber
 
 
-class Registration : Base(), StoreSubscriber<AppState>{
+class Registration : Base(), StoreSubscriber<RegistrationState>{
     private val email : EditText by lazy {
          this.findViewById(R.id.edtEmail) as EditText
     }
@@ -48,13 +46,14 @@ class Registration : Base(), StoreSubscriber<AppState>{
                     location = location.text.toString(),
                     sex = this.findViewById<RadioButton>(sex.checkedRadioButtonId).text.toString(),
                     avatarUrl = ""))
+
         }
     }
 
-    override fun newState(state: AppState) {
-        if(state.registrationState.registerState == RegisterState.Request){
+    override fun newState(state: RegistrationState) {
+        if(state.registerState == RegisterState.Request){
             progressDialog.show(fragmentManager,"Progress")
-        }else if (state.registrationState.registerState == RegisterState.Success){
+        }else if (state.registerState == RegisterState.Success){
 
             //TODO : Doing something when success
         }else{

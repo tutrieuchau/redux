@@ -7,7 +7,8 @@ import com.tutrieuchau.kotlin.States.AppState
 import org.rekotlinrouter.Router
 import tw.geothings.rekotlin.Store
 
-var mainStore = Store(state = null,
+var mainStore = Store(
+        state = null,
         reducer = ::appReducer,
         middleware = arrayListOf(middleware))
 var router: Router<AppState>? = null
