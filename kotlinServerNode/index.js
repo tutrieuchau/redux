@@ -14,11 +14,11 @@ app.post('/registration', function(req, res){
         var isExist = users.some(el=>{
             return el.email == rgUser.email;
         });
-        if(isExist){
-            res.json({'success':false, 'msg':'register email is exists!'});
+        if(!rgUser.email && isExist){
+            res.json({'success':false, 'message':'register email is exists!'});
         }else{
             users.push(rgUser);
-            res.json({"email": rgUser.email, "fullname": rgUser.fullname,'success':true, 'msg':''});    
+            res.json({"email": rgUser.email, "fullname": rgUser.fullname,'success':true, 'message':''});    
         }
 
     }, 3000);

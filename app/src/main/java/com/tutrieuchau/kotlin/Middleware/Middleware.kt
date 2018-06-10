@@ -49,7 +49,7 @@ fun executeRegistration(action: RegistAction, dispatch: DispatchFunction){
             avatarUrl = action.avatarUrl,
             sex = action.sex,
             location = action.location)
-    val registrationTask = RegistrationTask(registrationMiddleware, user = user, url = "http://127.0.0.1:1234")
+    val registrationTask = RegistrationTask(registrationMiddleware, user = user, url = "http://192.168.1.158:1234")
     registrationTask.execute()
     dispatch(RegistStartedAction(email = action.email))
 }

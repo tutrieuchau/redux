@@ -6,23 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     tools:context=".Controllers.Registration">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/progress"
-        android:background="@android:color/darker_gray"
-        android:gravity="center_vertical|center_horizontal">
-
-        <com.github.ybq.android.spinkit.SpinKitView
-            android:id="@+id/spitKit"
-            style="@style/SpinKitView.Large.ChasingDots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            app:SpinKit_Color="@android:color/white" />
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"

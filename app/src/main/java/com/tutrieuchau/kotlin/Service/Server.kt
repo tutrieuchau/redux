@@ -8,23 +8,23 @@ import com.tutrieuchau.kotlin.Data.User
 import com.tutrieuchau.kotlin.Middleware.RegistrationListenerInterface
 import com.tutrieuchau.kotlin.mainStore
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.POST
+import java.net.ConnectException
 
 class RegistrationTask(val registrationListenerInterface: RegistrationListenerInterface,var user: User,val url: String) : AsyncTask<User,Void, RegistrationRepo>() {
     private var retrofit = Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build()
     override fun doInBackground(vararg users: User?): RegistrationRepo {
         val networkService = retrofit.create(NetworkService::class.java)
-        val registrationRepo = networkService.registration(email = user.email,
-                password = user.password,
-                fullName = user.fullName,
-                sex = user.sex,
-                avatarUrl = user.avatarUrl,
-                location = user.location).execute().body() as RegistrationRepo
-        return RegistrationRepo(success = false,message = "",email = "",fullName = "")
+        var registrationRepo = RegistrationRepo(success = false,message = "",email = "",fullName = "")
+        try {
+            registrationRepo = networkService.registration(user).execute().body() as RegistrationRepo
+        }catch (e:ConnectException){
+            e.printStackTrace()
+        }
+        return registrationRepo
     }
 
     override fun onPostExecute(registrationRepo : RegistrationRepo) {
@@ -43,10 +43,5 @@ class RegistrationTask(val registrationListenerInterface: RegistrationListenerIn
 }
 interface NetworkService{
     @POST("/registration")
-    fun registration(email:String?,
-                     fullName: String?,
-                     password: String?,
-                     sex: String?,
-                     avatarUrl: String?,
-                     location: String?) : Call<RegistrationRepo>
+    fun registration(@Body user: User) : Call<RegistrationRepo>
 }

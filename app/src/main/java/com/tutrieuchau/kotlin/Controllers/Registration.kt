@@ -1,11 +1,14 @@
 package com.tutrieuchau.kotlin.Controllers
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.view.View
-import android.widget.*
-import com.github.ybq.android.spinkit.SpinKitView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.tutrieuchau.kotlin.Action.RegistAction
-import com.tutrieuchau.kotlin.Action.RegistStartedAction
+import com.tutrieuchau.kotlin.Dialog.ProgressDialog
 import com.tutrieuchau.kotlin.R
 import com.tutrieuchau.kotlin.States.AppState
 import com.tutrieuchau.kotlin.States.RegisterState
@@ -14,7 +17,6 @@ import tw.geothings.rekotlin.StoreSubscriber
 
 
 class Registration : Base(), StoreSubscriber<AppState>{
-
     private val email : EditText by lazy {
          this.findViewById(R.id.edtEmail) as EditText
     }
@@ -33,9 +35,7 @@ class Registration : Base(), StoreSubscriber<AppState>{
     private val btnRegister: Button by lazy {
         this.findViewById(R.id.btnRegister) as Button
     }
-    private val progress: LinearLayout by lazy{
-        this.findViewById(R.id.progress) as LinearLayout
-    }
+    val progressDialog = ProgressDialog()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -49,17 +49,16 @@ class Registration : Base(), StoreSubscriber<AppState>{
                     sex = this.findViewById<RadioButton>(sex.checkedRadioButtonId).text.toString(),
                     avatarUrl = ""))
         }
-        progress.visibility = View.GONE
     }
 
     override fun newState(state: AppState) {
         if(state.registrationState.registerState == RegisterState.Request){
-            progress.visibility = View.VISIBLE
+            progressDialog.show(fragmentManager,"Progress")
         }else if (state.registrationState.registerState == RegisterState.Success){
-            progress.visibility = View.GONE
+
             //TODO : Doing something when success
         }else{
-            progress.visibility = View.GONE
+
             //TODO : Show error
         }
     }
