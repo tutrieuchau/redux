@@ -22,7 +22,7 @@ data class AuthenticationState(
         var isFetching: Boolean = false
 ): StateType
 
-data class RegistrationState(var registerState: RegisterState = RegisterState.Request,
+data class RegistrationState(var registerState: RegisterState? = null,
                              var email: String? = null,
                              var fullName: String? = null,
                              var message: String? = null) : StateType

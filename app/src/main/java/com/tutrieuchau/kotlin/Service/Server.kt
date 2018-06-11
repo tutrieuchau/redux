@@ -12,7 +12,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
-import java.net.ConnectException
 
 class RegistrationTask(val registrationListenerInterface: RegistrationListenerInterface,var user: User,val url: String) : AsyncTask<User,Void, RegistrationRepo>() {
     private var retrofit = Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build()
@@ -21,8 +20,9 @@ class RegistrationTask(val registrationListenerInterface: RegistrationListenerIn
         var registrationRepo = RegistrationRepo(success = false,message = "",email = "",fullName = "")
         try {
             registrationRepo = networkService.registration(user).execute().body() as RegistrationRepo
-        }catch (e:ConnectException){
+        }catch (e:Exception){
             e.printStackTrace()
+            return RegistrationRepo(success = false, message = "SocketTimeout",fullName = "", email = "")
         }
         return registrationRepo
     }

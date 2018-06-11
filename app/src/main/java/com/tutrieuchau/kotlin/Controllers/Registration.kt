@@ -37,7 +37,7 @@ class Registration : Base(), StoreSubscriber<RegistrationState>{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        mainStore.subscribe(this)
+        mainStore.subscribe(this , transform = {it.select { it.registrationState }.skipRepeats{oldState, newState ->oldState == newState}})
         btnRegister.setOnClickListener{
             mainStore.dispatch(RegistAction(
                     email = email.text.toString(),
@@ -54,7 +54,7 @@ class Registration : Base(), StoreSubscriber<RegistrationState>{
         if(state.registerState == RegisterState.Request){
             progressDialog.show(fragmentManager,"Progress")
         }else if (state.registerState == RegisterState.Success){
-
+            progressDialog.dismiss()
             //TODO : Doing something when success
         }else{
 
