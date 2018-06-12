@@ -6,7 +6,7 @@
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spitKit"
-        style="@style/SpinKitView.Circle"
+        style="@style/SpinKitView.Wave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -24,19 +24,12 @@ class LoginAction {
                               var location: String): Action
 }
 
-fun regist(email : String): AsyncActionCreator<RegistrationState, Store<AppState>> {
-    val res : AsyncActionCreator<RegistrationState, Store<AppState>> = { state, store, actionCreatorCallback -> {
-
-    }}
-    return res;
-}
-data class RegistAction( var email : String,
+data class RegistStartedAction( var email : String,
                           var fullName : String,
                           var password: String,
                           var avatarUrl: String,
                           var sex: String,
-                          var location: String)
-data class RegistStartedAction(var email: String) : Action
+                          var location: String): Action
 data class RegistCompletedAction(var completedStatus: CompletedStatus? = CompletedStatus.Success, var message:String?, var email: String?, var fullName: String?): Action
 enum class CompletedStatus{
     Success,

@@ -1,7 +1,6 @@
 package com.tutrieuchau.kotlin.Middleware
 
 import com.tutrieuchau.kotlin.Action.LoginAction
-import com.tutrieuchau.kotlin.Action.RegistAction
 import com.tutrieuchau.kotlin.Action.RegistCompletedAction
 import com.tutrieuchau.kotlin.Action.RegistStartedAction
 import com.tutrieuchau.kotlin.Data.User
@@ -32,7 +31,7 @@ internal val middleware : Middleware<AppState> = { dispatch, getstate ->
     { next ->
         {action ->
             when(action){
-                is RegistAction ->{
+                is RegistStartedAction ->{
                     executeRegistration(action, dispatch)
                 }
             }
@@ -41,7 +40,7 @@ internal val middleware : Middleware<AppState> = { dispatch, getstate ->
     }
 }
 
-fun executeRegistration(action: RegistAction, dispatch: DispatchFunction){
+fun executeRegistration(action: RegistStartedAction, dispatch: DispatchFunction){
     val registrationMiddleware = RegistrationListenerMiddleware()
     val user = User(
             email = action.email,
@@ -52,5 +51,4 @@ fun executeRegistration(action: RegistAction, dispatch: DispatchFunction){
             location = action.location)
     val registrationTask = RegistrationTask(registrationMiddleware, user = user, url = "http://192.168.11.165:1234")
     registrationTask.execute()
-    dispatch(RegistStartedAction(email = action.email))
 }

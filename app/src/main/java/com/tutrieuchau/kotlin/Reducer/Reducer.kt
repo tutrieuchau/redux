@@ -5,6 +5,8 @@ import com.tutrieuchau.kotlin.Action.*
 import com.tutrieuchau.kotlin.States.*
 import org.rekotlinrouter.NavigationReducer
 import org.rekotlinrouter.NavigationState
+import org.rekotlinrouter.SetRouteAction
+import org.rekotlinrouter.SetRouteSpecificData
 import tw.geothings.rekotlin.Action
 
 fun appReducer(action: Action, oldState:AppState?) : AppState {
@@ -48,8 +50,16 @@ fun registrationReducer(action: Action, state: RegistrationState?) : Registratio
     }
     return newState
 }
-fun navigationReducer(action: Action, state: NavigationState) : NavigationState{
-    //TODO: Navigation Reducer
-    val newState = state ?: NavigationState()
-    return newState
+fun navigationReducer(action: Action, oldState: NavigationState) : NavigationState{
+    val state =  oldState ?: NavigationReducer.handleAction(action = action, state = oldState)
+    when (action) {
+        is SetRouteAction -> {
+            return NavigationReducer.handleAction(action = action, state = state)
+        }
+
+        is SetRouteSpecificData -> {
+            return NavigationReducer.handleAction(action = action, state = state)
+        }
+    }
+    return state
 }
