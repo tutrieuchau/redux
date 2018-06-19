@@ -26,14 +26,14 @@ app.post('/registration', function(req, res){
 app.post('/login',function(req,res){
     var lgUser = req.body;
     setTimeout(function(){
-        var loginSuccess = users.some(el=>{
+        var loginSuccess = users.filter(el=>{
             return el.email == lgUser.email && el.password == lgUser.password;
         });
-        if(loginSuccess){
+        if(loginSuccess.length == 1){
             var token = crypto.randomBytes(64).toString('hex');
-            res.json({"success": true, "token": token});
+            res.json({"success": true, "token": token, message: ""});
         }else{
-            res.json({"success": false, "token": ""});
+            res.json({"success": false, "token": "", message:"Email or Password was wrong"});
         }
     }, 3000);
 });

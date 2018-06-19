@@ -15,7 +15,7 @@ fun appReducer(action: Action, oldState:AppState?) : AppState {
             authenticationState = authenticationReducer(action = action, state = oldState?.authenticationState),
             registrationState = registrationReducer(action = action, state = oldState?.registrationState))
     return state.copy(
-            navigationState = (::navigationReducer)(action, state.navigationState),
+            navigationState = NavigationReducer.handleAction(action = action, state = oldState?.navigationState),
             authenticationState = authenticationReducer(action = action, state = state.authenticationState),
             registrationState = registrationReducer(action = action, state = state.registrationState)
     )
@@ -23,8 +23,22 @@ fun appReducer(action: Action, oldState:AppState?) : AppState {
 fun authenticationReducer( action: Action, state: AuthenticationState?) : AuthenticationState{
     var newState = state?: AuthenticationState()
     when (action){
-        is LoginAction.LoginStarted -> {
+        is LoginStartedAction -> {
             return newState.copy(loggedInState = LoggedInState.Request)
+        }
+        is LoginCompletedAction ->{
+            if(action.completedStatus == CompletedStatus.Success){
+                return newState.copy(
+                        loggedInState = LoggedInState.Success,
+                        token = action.token,
+                        message = action.message)
+            }
+            if (action.completedStatus == CompletedStatus.Failed){
+                return newState.copy(
+                        loggedInState = LoggedInState.Error,
+                        token = action.token,
+                        message = action.message)
+            }
         }
     }
     return newState
@@ -50,16 +64,4 @@ fun registrationReducer(action: Action, state: RegistrationState?) : Registratio
     }
     return newState
 }
-fun navigationReducer(action: Action, oldState: NavigationState) : NavigationState{
-    val state =  oldState ?: NavigationReducer.handleAction(action = action, state = oldState)
-    when (action) {
-        is SetRouteAction -> {
-            return NavigationReducer.handleAction(action = action, state = state)
-        }
 
-        is SetRouteSpecificData -> {
-            return NavigationReducer.handleAction(action = action, state = state)
-        }
-    }
-    return state
-}

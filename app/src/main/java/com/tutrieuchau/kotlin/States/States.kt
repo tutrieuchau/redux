@@ -12,7 +12,7 @@ data class AppState(
 
 data class AuthenticationState(
         var loggedInState: LoggedInState? = null,
-        var errorMessage: String? = null,
+        var message: String? = null,
         var token: String? = null,
         var email : String? = null,
         var displayName : String? = null,

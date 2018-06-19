@@ -11,9 +11,12 @@ import com.tutrieuchau.kotlin.Dialog.ProgressDialog
 import com.tutrieuchau.kotlin.Dialog.ResultDialog
 import com.tutrieuchau.kotlin.Dialog.ResultDialogCallBackInteface
 import com.tutrieuchau.kotlin.R
+import com.tutrieuchau.kotlin.Routers.loginIdentifier
 import com.tutrieuchau.kotlin.States.RegisterState
 import com.tutrieuchau.kotlin.States.RegistrationState
 import com.tutrieuchau.kotlin.mainStore
+import org.rekotlinrouter.SetRouteAction
+import org.rekotlinrouter.SetRouteSpecificData
 import tw.geothings.rekotlin.StoreSubscriber
 
 
@@ -37,6 +40,7 @@ class Registration : Base(), StoreSubscriber<RegistrationState>, ResultDialogCal
         this.findViewById(R.id.btnRegister) as Button
     }
     val progressDialog = ProgressDialog()
+    var currentState : RegistrationState? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -55,9 +59,9 @@ class Registration : Base(), StoreSubscriber<RegistrationState>, ResultDialogCal
 
     override fun newState(state: RegistrationState) {
         if(state.registerState == RegisterState.Request){
-            progressDialog.show(fragmentManager,"Progress")
+//            progressDialog.show(fragmentManager,"Progress")
         }else if (state.registerState == RegisterState.Success){
-            progressDialog.dismiss()
+//            progressDialog.dismiss()
             val resultDialog = ResultDialog()
             val bundle = Bundle()
             bundle.putString("title","Success")
@@ -66,7 +70,7 @@ class Registration : Base(), StoreSubscriber<RegistrationState>, ResultDialogCal
             resultDialog.arguments = bundle
             resultDialog.show(fragmentManager, "Result")
         }else if(state.registerState == RegisterState.Error){
-            progressDialog.dismiss()
+//            progressDialog.dismiss()
             val resultDialog = ResultDialog()
             val bundle = Bundle()
             bundle.putString("title","Failed")
@@ -75,6 +79,7 @@ class Registration : Base(), StoreSubscriber<RegistrationState>, ResultDialogCal
             resultDialog.show(fragmentManager, "Result")
             bundle.putSerializable("type", CompletedStatus.Failed)
         }
+        currentState = state
     }
 
     override fun onDestroy() {
@@ -84,8 +89,12 @@ class Registration : Base(), StoreSubscriber<RegistrationState>, ResultDialogCal
 
     override fun onDismiss(status: CompletedStatus) {
         if(status == CompletedStatus.Success){
-            //TODO: Router to login
+            val route = arrayListOf(loginIdentifier)
+            val action = SetRouteAction(route = route)
+            mainStore.dispatch(action)
         }
+    }
 
+    override fun onBackPressed() {
     }
 }
